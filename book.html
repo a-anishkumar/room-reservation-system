@@ -1,0 +1,98 @@
+<!-- book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Room</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #0071c2;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background: #ffcc00;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      border: none;
+    }
+
+    button:hover {
+      background: #e6b800;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2 id="roomTitle">Booking Form</h2>
+  <form method="POST" action="book.php">
+    <input type="hidden" id="room" name="room" required>
+
+    <label for="date">Date:</label>
+    <input type="date" name="date" required>
+
+    <label for="start">Start Time:</label>
+    <input type="time" name="start" required>
+
+    <label for="end">End Time:</label>
+    <input type="time" name="end" required>
+
+    <button type="submit">Book Room</button>
+  </form>
+
+  <a class="back-link" href="index.html">← Back to Room Selection</a>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const roomId = params.get('room');
+  const roomName = params.get('name');
+
+  if (roomId && roomName) {
+    document.getElementById('room').value = roomId;
+    document.getElementById('roomTitle').textContent = `Booking for: ${roomName}`;
+  } else {
+    alert("Room not selected. Redirecting back.");
+    window.location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>
